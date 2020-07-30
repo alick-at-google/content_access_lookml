@@ -1,4 +1,4 @@
-connection: "bq_content_access"
+connection: "@{connection}"
 
 include: "/Views/*.view.lkml"                # include all views in the views/ folder in this project
 # include: "/**/view.lkml"                   # include all views in this project
@@ -13,6 +13,7 @@ explore: access_group {
     sql_on: ${access_group.folder_id} = ${access_user.folder_id};;
   }
   join: groups {
+    relationship: many_to_one
     sql_on: ${groups.id} = ${access_group.group_id} ;;
   }
   join: users {
@@ -24,6 +25,7 @@ explore: access_group {
     sql_on: ${content.folder_id} = ${access_group.folder_id} ;;
   }
   join: folder {
+    relationship: many_to_one
     sql_on: ${folder.folder_id} = ${content.folder_id}
     AND ${folder.folder_id} = "13";;
   }
@@ -35,9 +37,11 @@ explore: access_user {
     sql_on: ${access_user.user_id} = ${users.id}  ;;
   }
   join: folder {
+    relationship: many_to_one
     sql_on: ${access_user.folder_id} = ${folder.folder_id} ;;
   }
   join: content {
+    relationship: many_to_one
     sql_on: ${folder.folder_id} = ${content.folder_id} ;;
   }
 }
