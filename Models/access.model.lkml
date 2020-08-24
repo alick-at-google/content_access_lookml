@@ -1,8 +1,9 @@
 connection: "@{connection}"
 
+
+include: "/LookML_Dashboards/*.dashboard"    #include lookML dashboards
 include: "/Views/*.view.lkml"                # include all views in the views/ folder in this project
-# include: "/**/view.lkml"                   # include all views in this project
-# include: "my_dashboard.dashboard.lookml"   # include a LookML dashboard called my_dashboard
+
 
 explore: users {}
 
@@ -98,7 +99,16 @@ explore: access {
 #   }
 }
 
-
+explore: access_group_lookml {
+  join: access__group {
+    relationship: many_to_one
+    sql: LEFT JOIN UNNEST(${access_group_lookml.group_id}) as access__group;;
+  }
+  join: access__user {
+    relationship: many_to_one
+    sql: LEFT JOIN UNNEST(${access_group_lookml.user_id}) as access__user ;;
+  }
+}
 
 
 
