@@ -6,6 +6,7 @@ include: "/Views/*.view.lkml"                # include all views in the views/ f
 
 explore: users {}
 
+#an edit to break code
 
 explore: access_group {
   join: access_user {
