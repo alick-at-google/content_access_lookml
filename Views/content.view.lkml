@@ -14,6 +14,11 @@ view: content {
     sql: ${TABLE}.content_name ;;
   }
 
+  dimension: len_name{
+    type: number
+    sql: LENGTH(${TABLE}.content_name) ;;
+  }
+
   dimension: folder_id {
     sql: CAST(${TABLE}.folder_id AS STRING) ;;
   }

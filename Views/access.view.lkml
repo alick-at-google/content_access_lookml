@@ -5,6 +5,7 @@ view: access {
     type: string
     sql: CAST(${TABLE}.folder_id AS STRING);;
   }
+  #test commit
 
   dimension: user_id {
     hidden: yes
