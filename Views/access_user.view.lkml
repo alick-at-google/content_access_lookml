@@ -7,6 +7,7 @@ view: access_user {
          LEFT JOIN UNNEST(access.user_id.list) AS access_user__id
           GROUP BY 1,2 ;;
   }
+  #commit
 
   dimension: folder_id {
     primary_key: yes
