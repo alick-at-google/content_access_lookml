@@ -8,7 +8,7 @@ view: access_group {
           GROUP BY 1,2 ;;
   }
 
-err
+
 
   dimension: folder_id {
     primary_key: yes

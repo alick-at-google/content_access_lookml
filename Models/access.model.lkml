@@ -4,7 +4,7 @@ connection: "@{connection}"
 include: "/LookML_Dashboards/*.dashboard"    #include lookML dashboards
 include: "/Views/*.view.lkml"                # include all views in the views/ folder in this project
 
-err
+
 explore: users {}
 
 #an edit to break code
