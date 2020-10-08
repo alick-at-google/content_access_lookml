@@ -5,7 +5,12 @@ include: "/LookML_Dashboards/*.dashboard"    #include lookML dashboards
 include: "/Views/*.view.lkml"                # include all views in the views/ folder in this project
 
 
-explore: users {}
+explore: users {
+  join: groups {
+    sql_on: ${users.group_id} = ${groups.id} ;;
+    relationship: many_to_one
+  }
+}
 
 #an edit to break code
 
@@ -62,43 +67,48 @@ explore: access_user {
 # }
 
 
+explore: access {}
 
-explore: access {
-  join: access_user__id {
-    relationship: one_to_many
-    type: inner
-    sql: LEFT JOIN UNNEST(${access.user_id}) AS access_user__id;;
-  }
-  join: access_group__id {
-    relationship: one_to_many
-    sql: LEFT JOIN UNNEST(${access.group_id}) AS access_group__id;;
-  }
-  join: folder {
-    relationship: many_to_many
-    sql_on: ${access.folder_id} = ${folder.folder_id} ;;
-  }
-  join: content {
-    relationship: many_to_many
-    sql_on: ${folder.folder_id} = ${content.folder_id} ;;
-  }
-  join: users {
-    relationship: many_to_many
-    sql_on: ${users.id} = ${access_user__id.item};;
-  }
-  join: groups {
-    relationship: many_to_one
-    sql_on: ${users__group_id.item} = ${groups.id} ;;
-  }
-  join: users__group_id {
-    relationship: many_to_one
-    sql: LEFT JOIN UNNEST(${users.group_id}) AS users__group_id ;;
-  }
-#   join: user_group {
-#     from: groups
-#     relationship: many_to_many
-#     sql: ${users__group_id.item} = ${groups.id} ;;
+explore: +access {}
+
+
+
+# explore: access {
+#   join: access_user__id {
+#     relationship: one_to_many
+#     type: inner
+#     sql: LEFT JOIN UNNEST(${access.user_id}) AS access_user__id;;
 #   }
-}
+#   join: access_group__id {
+#     relationship: one_to_many
+#     sql: LEFT JOIN UNNEST(${access.group_id}) AS access_group__id;;
+#   }
+#   join: folder {
+#     relationship: many_to_many
+#     sql_on: ${access.folder_id} = ${folder.folder_id} ;;
+#   }
+#   join: content {
+#     relationship: many_to_many
+#     sql_on: ${folder.folder_id} = ${content.folder_id} ;;
+#   }
+#   join: users {
+#     relationship: many_to_many
+#     sql_on: ${users.id} = ${access_user__id.item};;
+#   }
+#   join: groups {
+#     relationship: many_to_one
+#     sql_on: ${users__group_id.item} = ${groups.id} ;;
+#   }
+#   join: users__group_id {
+#     relationship: many_to_one
+#     sql: LEFT JOIN UNNEST(${users.group_id}) AS users__group_id ;;
+#   }
+# #   join: user_group {
+# #     from: groups
+# #     relationship: many_to_many
+# #     sql: ${users__group_id.item} = ${groups.id} ;;
+# #   }
+# }
 
 explore: access_group_lookml {
   join: access__group {

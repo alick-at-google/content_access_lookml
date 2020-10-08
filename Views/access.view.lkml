@@ -12,11 +12,11 @@ view: access {
 #     type: string
     sql: ${TABLE}.user_id.list ;;
   }
-  dimension: group_id {
+#   dimension: group_id {
 
-#     type: string
-    sql: ${TABLE}.group_id.list ;;
-  }
+# #     type: string
+#     sql: ${TABLE}.group_id.list ;;
+#   }
 }
 
 view: access_user__id {

@@ -3,7 +3,7 @@ view: content {
 
   dimension: id {
     primary_key: yes
-    sql: ${TABLE}.content_id /;;
+    sql: ${TABLE}.content_id;;
   }
 
   dimension: type {

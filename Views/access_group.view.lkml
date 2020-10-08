@@ -9,6 +9,9 @@ view: access_group {
   }
 
 
+  filter: filter_test {
+    type: string
+  }
 
   dimension: folder_id {
     primary_key: yes

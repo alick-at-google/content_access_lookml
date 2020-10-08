@@ -10,14 +10,27 @@ view: users {
             users__group_id.item AS group_id
         FROM folder_access.user  AS users
         LEFT JOIN UNNEST(users.group_id.list) AS users__group_id
+        WHERE {% condition test %} groups.name {% endcondition %}
         ORDER BY 5;;
   }
 
+
+  filter: test {
+    type: string
+  }
 
   dimension: id {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
+    link: {
+      label: "pass to look"
+      url: "/looks/1972?f[users.email]={{ users.email._value }} "
+    }
+    link: {
+      label: "pass to dashboard"
+      url: "/dashboards/748?folder_id={{ folder.folder_id }}"
+    }
   }
 
   dimension: email {
