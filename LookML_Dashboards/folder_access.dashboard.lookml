@@ -1,7 +1,7 @@
 - dashboard: folder_content_access
   title: Folder Content Access
   layout: newspaper
-  preferred_viewer: dashboards-next
+  preferred_viewer: dashboards
   elements:
   - title: Group Info
     name: Group Info
