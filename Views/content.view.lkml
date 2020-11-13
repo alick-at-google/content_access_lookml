@@ -3,18 +3,24 @@ view: content {
 
   dimension: id {
     primary_key: yes
-    sql: ${TABLE}.content_id /;;
+    sql: ${TABLE}.content_id;;
   }
 
   dimension: type {
     sql: ${TABLE}.content_type ;;
   }
 
+  dimension: type_id {
+    sql: CONCAT(${TABLE}.content_type, " ", ${TABLE}.content_id) ;;
+  }
+
   dimension: name {
     sql: ${TABLE}.content_name ;;
+    html: <a href="/{{ content.type }}/{{ content.id }}">{{ value | append: " - " | append: content.id }}</a> ;;
   }
 
   dimension: len_name{
+    hidden: yes
     type: number
     sql: LENGTH(${TABLE}.content_name) ;;
   }
@@ -24,6 +30,6 @@ view: content {
   }
   measure: count {
     type: count
-    drill_fields: [id, type, name]
+    drill_fields: [folder.folder_id, folder.name, id, type, name]
   }
 }

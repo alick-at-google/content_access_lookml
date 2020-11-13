@@ -6,16 +6,16 @@ view: folder {
     primary_key: yes
     type: string
     sql: ${TABLE}.folder_id ;;
+    link: {
+      label: "Link to Folder"
+      url: "/folder/{{ value }}"
+    }
   }
 
   dimension: name {
+    label: "Folder Name"
     type: string
     sql: ${TABLE}.folder_name ;;
-  }
-
-  measure: name1 {
-    type: string
-    sql: MAX(${TABLE}.folder_name)  ;;
   }
 
   dimension: content_metadata_id {

@@ -7,5 +7,5 @@ project_name: "content_access"
 #   project: "name_of_other_project"
 # }
 constant: connection {
-  value: "bq_content_access"
+  value: "content_access"
 }

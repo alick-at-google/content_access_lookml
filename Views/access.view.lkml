@@ -9,20 +9,18 @@ view: access {
 
   dimension: user_id {
     hidden: yes
-#     type: string
     sql: ${TABLE}.user_id.list ;;
   }
   dimension: group_id {
-
-#     type: string
+    hidden: yes
     sql: ${TABLE}.group_id.list ;;
   }
 }
 
-view: access_user__id {
-  dimension: item {}
+view: user_access {
+  dimension: users { sql: ${TABLE}.item ;; }
 }
 
-view: access_group__id {
-  dimension: item {}
+view: group_access {
+  dimension: groups {  sql: ${TABLE}.item ;; }
 }

@@ -1,23 +1,10 @@
 view: users {
-#   sql_table_name: folder_access.user ;;
-
-  derived_table: {
-    sql: SELECT
-            users.user_id  AS id,
-            users.first_name  AS first_name,
-            users.last_name  AS last_name,
-            users.email  AS email,
-            users__group_id.item AS group_id
-        FROM folder_access.user  AS users
-        LEFT JOIN UNNEST(users.group_id.list) AS users__group_id
-        ORDER BY 5;;
-  }
-
+  sql_table_name: folder_access.user ;;
 
   dimension: id {
     primary_key: yes
     type: number
-    sql: ${TABLE}.id ;;
+    sql: ${TABLE}.user_id ;;
   }
 
   dimension: email {
@@ -26,10 +13,12 @@ view: users {
   }
 
   dimension: first_name {
+    hidden: yes
     type: string
     sql: ${TABLE}.first_name ;;
   }
   dimension: last_name {
+    hidden: yes
     type: string
     sql: ${TABLE}.last_name ;;
   }
@@ -41,17 +30,32 @@ view: users {
   }
 
   dimension: group_id {
-    sql: ${TABLE}.group_id;;
+    hidden: yes
+    sql: ${TABLE}.group_id.list;;
+  }
+  dimension: role_id {
+    hidden: yes
+    sql: ${TABLE}.role_id.list;;
   }
   measure: count {
     type: count
+    link: {
+      label: "Users in Group"
+      url: "/looks/1?f[groups.id]={{ groups.id._value }}"
+    }
   }
 }
 
 view: users__role_id {
-  dimension: item {label:"role id"}
+  dimension: item {
+    label:"Role ID"
+    sql: ${TABLE}.item;;
+    }
 }
 
 view: users__group_id {
-  dimension: item {label:"group id"}
+  dimension: item {
+    label:"Group ID"
+    sql: ${TABLE}.item;;
+    }
 }
