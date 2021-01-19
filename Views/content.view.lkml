@@ -26,4 +26,9 @@ view: content {
     type: count
     drill_fields: [id, type, name]
   }
+  measure: cancelled_orders_last_week {
+     type: count
+     filters: [status: "cancelled", date: "last week"]
+   }
+  
 }
